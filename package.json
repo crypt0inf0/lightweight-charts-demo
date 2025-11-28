@@ -1,0 +1,16 @@
+{
+  "name": "line-tools-demo",
+  "version": "1.0.0",
+  "description": "Demo for testing the compiled line-tools plugin",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "lightweight-charts": "^4.2.2"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

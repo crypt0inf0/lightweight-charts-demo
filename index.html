@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Tools Plugin Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #131722;
+            color: #d1d4dc;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #2962FF;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .toolbar {
+            background: #1e222d;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: 1px solid #2962FF;
+            background: #1e222d;
+            color: #d1d4dc;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: #2962FF;
+            color: white;
+        }
+
+        button.active {
+            background: #2962FF;
+            color: white;
+        }
+
+        #chart-container {
+            width: 100%;
+            height: 600px;
+            background: #1e222d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .instructions {
+            background: #1e222d;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .instructions h2 {
+            margin-bottom: 10px;
+            color: #2962FF;
+            font-size: 18px;
+        }
+
+        .instructions ul {
+            list-style-position: inside;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📈 Line Tools Plugin Demo</h1>
+
+        <div class="toolbar">
+            <button id="btn-none" class="active">None (Select)</button>
+            <button id="btn-trend-line">Trend Line</button>
+            <button id="btn-arrow">Arrow</button>
+            <button id="btn-ray">Ray</button>
+            <button id="btn-extended-line">Extended Line</button>
+            <button id="btn-horizontal-ray">Horizontal Ray</button>
+            <button id="btn-horizontal-line">Horizontal Line</button>
+            <button id="btn-vertical-line">Vertical Line</button>
+            <button id="btn-cross-line">Cross Line</button>
+            <button id="btn-rectangle">Rectangle</button>
+            <button id="btn-price-range">Price Range</button>
+            <button id="btn-circle">Circle</button>
+            <button id="btn-triangle">Triangle</button>
+            <button id="btn-parallel-channel">Parallel Channel</button>
+            <button id="btn-fib-retracement">Fib Retracement</button>
+            <button id="btn-long-position">Long Position</button>
+            <button id="btn-short-position">Short Position</button>
+            <button id="btn-elliott-impulse">Elliott Impulse Wave</button>
+            <button id="btn-elliott-correction">Elliott Correction Wave</button>
+            <button id="btn-date-range">Date Range</button>
+            <button id="btn-fib-extension">Fib Extension</button>
+            <button id="btn-session-highlighting">Session Highlighting</button>
+            <button id="btn-brush">Brush</button>
+            <button id="btn-highlighter">Highlighter</button>
+            <button id="btn-path">Path</button>
+            <button id="btn-text">Text</button>
+            <button id="btn-callout">Callout</button>
+            <button id="btn-user-price-alerts">User Price Alerts</button>
+            <button id="btn-clear" style="background: #ef5350; border-color: #ef5350;">🗑️ Clear All</button>
+        </div>
+
+        <div id="chart-container"></div>
+
+        <div class="instructions">
+            <h2>Instructions:</h2>
+            <ul>
+                <li><strong>Select a Tool:</strong> Click any tool button above</li>
+                <li><strong>Draw:</strong> Click on the chart to place points (varies by tool)</li>
+                <li><strong>Edit:</strong> Click "None (Select)" then click on any drawn tool to edit it</li>
+                <li><strong>Delete:</strong> Select a tool and use the delete button in the floating toolbar</li>
+                <li><strong>Cancel Drawing:</strong> Right-click while drawing to cancel</li>
+                <li><strong>Clear All:</strong> Click the trash button to remove all drawings</li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>
