@@ -1,4 +1,4 @@
-import { createChart, ColorType } from 'lightweight-charts';
+import { createChart, ColorType, CandlestickSeries } from 'lightweight-charts';
 import { LineToolManager } from './line-tools/line-tools.js';
 import './line-tools/line-tools.css';
 
@@ -57,8 +57,8 @@ const chart = createChart(chartContainer, {
     },
 });
 
-// Add candlestick series
-const candlestickSeries = chart.addCandlestickSeries({
+// Add candlestick series (v5 API: use `addSeries` with series class)
+const candlestickSeries = chart.addSeries(CandlestickSeries, {
     upColor: '#26a69a',
     downColor: '#ef5350',
     borderVisible: false,
