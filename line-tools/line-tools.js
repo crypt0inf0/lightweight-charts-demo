@@ -42,7 +42,7 @@ function v(h, t, e) {
     y: e.priceToCoordinate(h.price)
   };
 }
-function V(h, t, e) {
+function R(h, t, e) {
   const i = (t.x - e.x) ** 2 + (t.y - e.y) ** 2;
   if (i === 0) return Math.hypot(h.x - t.x, h.y - t.y);
   let s = ((h.x - t.x) * (e.x - t.x) + (h.y - t.y) * (e.y - t.y)) / i;
@@ -52,7 +52,7 @@ function vt(h, t) {
   const e = Math.min(t.x1, t.x2), i = Math.max(t.x1, t.x2), s = Math.min(t.y1, t.y2), o = Math.max(t.y1, t.y2);
   return h.x >= e && h.x <= i && h.y >= s && h.y <= o;
 }
-function Rt(h, t, e) {
+function Vt(h, t, e) {
   return Math.hypot(h.x - t.x, h.y - t.y) <= e;
 }
 function rt(h, t) {
@@ -217,8 +217,8 @@ function Ft(h, t, e) {
   const l = 5 * e * a, r = 1 * i;
   if (l * s * 0.2 <= r)
     return [];
-  const c = n.scaled(l), p = t.subtract(c), _ = n.transposed(), d = 1 * l, u = _.scaled(d), f = p.add(u), m = p.subtract(u), x = f.subtract(t).normalized().scaled(r), T = m.subtract(t).normalized().scaled(r), S = t.add(x), A = t.add(T), P = i * (s - 1), R = _.scaled(P), U = Math.min(l - 1 * i / s, i * s * 1), b = n.scaled(U), Mt = t.subtract(R), Vt = t.add(R), ht = t.subtract(b);
-  return [[f, S], [m, A], [Mt, ht.subtract(R)], [Vt, ht.add(R)]];
+  const c = n.scaled(l), p = t.subtract(c), _ = n.transposed(), d = 1 * l, u = _.scaled(d), f = p.add(u), m = p.subtract(u), x = f.subtract(t).normalized().scaled(r), T = m.subtract(t).normalized().scaled(r), S = t.add(x), A = t.add(T), P = i * (s - 1), V = _.scaled(P), U = Math.min(l - 1 * i / s, i * s * 1), b = n.scaled(U), Mt = t.subtract(V), Rt = t.add(V), ht = t.subtract(b);
+  return [[f, S], [m, A], [Mt, ht.subtract(V)], [Rt, ht.add(V)]];
 }
 class Ot {
   _p1;
@@ -346,9 +346,9 @@ class Y {
       !!this._options.extendRight
     );
     if (f) {
-      if (V({ x: t, y: e }, f[0], f[1]) < 5)
+      if (R({ x: t, y: e }, f[0], f[1]) < 5)
         return { hit: !0, type: "line" };
-    } else if (V({ x: t, y: e }, { x: o, y: n }, { x: a, y: l }) < 5)
+    } else if (R({ x: t, y: e }, { x: o, y: n }, { x: a, y: l }) < 5)
       return { hit: !0, type: "line" };
     return null;
   }
@@ -891,8 +891,8 @@ class se {
       const i = e.context, s = y(this._p1.x, e.horizontalPixelRatio), o = y(this._p1.y, e.verticalPixelRatio), n = y(this._p2.x, e.horizontalPixelRatio), a = y(this._p2.y, e.verticalPixelRatio), l = y(this._p3.x, e.horizontalPixelRatio), r = y(this._p3.y, e.verticalPixelRatio), c = s, p = o, _ = n, d = a;
       let u = 0;
       if (n !== s) {
-        const P = (a - o) / (n - s), R = o + P * (l - s);
-        u = r - R;
+        const P = (a - o) / (n - s), V = o + P * (l - s);
+        u = r - V;
       }
       const f = o + u, m = a + u, x = s, T = n, S = o + u / 2, A = a + u / 2;
       i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.fillStyle = this._options.backgroundColor, E(i, this._options.lineStyle), i.beginPath(), i.moveTo(c, p), i.lineTo(_, d), i.lineTo(T, m), i.lineTo(x, f), i.closePath(), i.fill(), i.beginPath(), i.moveTo(c, p), i.lineTo(_, d), i.stroke(), i.beginPath(), i.moveTo(x, f), i.lineTo(T, m), i.stroke(), i.beginPath(), i.moveTo(c, p), i.lineTo(x, f), i.stroke(), i.beginPath(), i.moveTo(_, d), i.lineTo(T, m), i.stroke(), this._options.showMiddle && (i.setLineDash([5 * e.horizontalPixelRatio, 5 * e.horizontalPixelRatio]), i.beginPath(), i.moveTo(s, S), i.lineTo(n, A), i.stroke(), i.setLineDash([])), this._selected && (g(e, c, p), g(e, _, d), g(e, x, f), g(e, T, m));
@@ -1137,7 +1137,7 @@ class G {
       return { hit: !0, type: "point", index: 0 };
     if (Math.hypot(t - a, e - l) < r)
       return { hit: !0, type: "point", index: 1 };
-    if (V({ x: t, y: e }, { x: o, y: n }, { x: a, y: l }) < 5)
+    if (R({ x: t, y: e }, { x: o, y: n }, { x: a, y: l }) < 5)
       return { hit: !0, type: "line" };
     const p = this._p2.price - this._p1.price, _ = Math.min(o, a), d = Math.max(o, a);
     for (const u of this._options.levels) {
@@ -1420,7 +1420,7 @@ class k {
     for (let a = 0; a < o.length - 1; a++) {
       const l = o[a], r = o[a + 1];
       if (l.x === null || l.y === null || r.x === null || r.y === null) continue;
-      if (V({ x: t, y: e }, l, r) < n)
+      if (R({ x: t, y: e }, l, r) < n)
         return { hit: !0, type: "line" };
     }
     return null;
@@ -1547,7 +1547,7 @@ class I {
     if (Math.hypot(t - a, e - l) < r)
       return { hit: !0, type: "point", index: 1 };
     const c = this._options.fontSize, p = this._text.length * c * 0.6 + 20, _ = c * 1.2 + 10;
-    return t >= a && t <= a + p && e >= l - _ / 2 && e <= l + _ / 2 ? { hit: !0, type: "point", index: 1 } : V({ x: t, y: e }, { x: o, y: n }, { x: a, y: l }) < 5 ? { hit: !0, type: "line" } : null;
+    return t >= a && t <= a + p && e >= l - _ / 2 && e <= l + _ / 2 ? { hit: !0, type: "point", index: 1 } : R({ x: t, y: e }, { x: o, y: n }, { x: a, y: l }) < 5 ? { hit: !0, type: "line" } : null;
   }
   updateAllViews() {
     this._paneViews.forEach((t) => t.update());
@@ -1748,7 +1748,7 @@ class Q {
     const i = this._chart.timeScale(), s = this._series, o = i.logicalToCoordinate(this._p1.logical), n = s.priceToCoordinate(this._p1.price), a = i.logicalToCoordinate(this._p2.logical), l = s.priceToCoordinate(this._p2.price);
     if (o === null || n === null || a === null || l === null) return null;
     const r = a - o, c = l - n, p = Math.hypot(r, c), _ = 8;
-    return Math.hypot(t - o, e - n) < _ ? { hit: !0, type: "point", index: 0 } : Math.hypot(t - a, e - l) < _ ? { hit: !0, type: "point", index: 1 } : Rt({ x: t, y: e }, { x: o, y: n }, p) ? { hit: !0, type: "shape" } : null;
+    return Math.hypot(t - o, e - n) < _ ? { hit: !0, type: "point", index: 0 } : Math.hypot(t - a, e - l) < _ ? { hit: !0, type: "point", index: 1 } : Vt({ x: t, y: e }, { x: o, y: n }, p) ? { hit: !0, type: "shape" } : null;
   }
   autoscaleInfo() {
     return null;
@@ -1783,8 +1783,8 @@ class Pe {
         m > 0 ? (b = p, i.moveTo(u - f, b - f), i.lineTo(u, b), i.lineTo(u + f, b - f)) : (b = c, i.moveTo(u - f, b + f), i.lineTo(u, b), i.lineTo(u + f, b + f));
       }
       i.stroke();
-      const x = this._source._p1.price, T = this._source._p2.price, S = Math.abs(T - x), A = x !== 0 ? (T - x) / x * 100 : 0, R = `${T > x ? "+" : ""}${S.toFixed(2)} (${Math.abs(A).toFixed(2)}%)`, U = T > x ? p + 25 * e.verticalPixelRatio : c - 10 * e.verticalPixelRatio;
-      if (i.font = `bold ${14 * e.verticalPixelRatio}px sans-serif`, i.fillStyle = this._options.borderColor, i.textAlign = "center", i.textBaseline = T > x ? "top" : "bottom", i.fillText(R, u, U), this._selected) {
+      const x = this._source._p1.price, T = this._source._p2.price, S = Math.abs(T - x), A = x !== 0 ? (T - x) / x * 100 : 0, V = `${T > x ? "+" : ""}${S.toFixed(2)} (${Math.abs(A).toFixed(2)}%)`, U = T > x ? p + 25 * e.verticalPixelRatio : c - 10 * e.verticalPixelRatio;
+      if (i.font = `bold ${14 * e.verticalPixelRatio}px sans-serif`, i.fillStyle = this._options.borderColor, i.textAlign = "center", i.textBaseline = T > x ? "top" : "bottom", i.fillText(V, u, U), this._selected) {
         g(e, s, o), g(e, n, a), g(e, s, a), g(e, n, o);
         const b = (o + a) / 2;
         g(e, u, o), g(e, u, a), g(e, s, b), g(e, n, b);
@@ -1930,7 +1930,7 @@ class Me {
     });
   }
 }
-class Ve {
+class Re {
   _source;
   _p1 = { x: null, y: null };
   _p2 = { x: null, y: null };
@@ -1951,7 +1951,7 @@ class Ve {
     );
   }
 }
-const Re = {
+const Ve = {
   lineColor: "#787B86",
   profitColor: "rgba(0, 255, 0, 0.2)",
   lossColor: "rgba(255, 0, 0, 0.2)",
@@ -1975,9 +1975,9 @@ class W {
   _selected = !1;
   constructor(t, e, i, s, o, n) {
     this._chart = t, this._series = e, this._p1 = i, this._p2 = s, this._p3 = o, this._options = {
-      ...Re,
+      ...Ve,
       ...n
-    }, this._paneViews = [new Ve(this)];
+    }, this._paneViews = [new Re(this)];
   }
   updatePoints(t, e, i) {
     this._p1 = t, this._p2 = e, this._p3 = i, this.updateAllViews();
@@ -2221,7 +2221,7 @@ class et {
     for (let l = 0; l < o.length - 1; l++) {
       const r = o[l], c = o[l + 1];
       if (r.x === null || r.y === null || c.x === null || c.y === null) continue;
-      if (V({ x: t, y: e }, r, c) < a)
+      if (R({ x: t, y: e }, r, c) < a)
         return { hit: !0, type: "line" };
     }
     return null;
@@ -2339,7 +2339,7 @@ class it {
     for (let l = 0; l < o.length - 1; l++) {
       const r = o[l], c = o[l + 1];
       if (r.x === null || r.y === null || c.x === null || c.y === null) continue;
-      if (V({ x: t, y: e }, r, c) < a)
+      if (R({ x: t, y: e }, r, c) < a)
         return { hit: !0, type: "line" };
     }
     return null;
@@ -2571,7 +2571,7 @@ class $ {
       return { hit: !0, type: "point", index: 1 };
     if (Math.hypot(t - r, e - c) < p)
       return { hit: !0, type: "point", index: 2 };
-    const _ = V({ x: t, y: e }, { x: o, y: n }, { x: a, y: l }), d = V({ x: t, y: e }, { x: a, y: l }, { x: r, y: c });
+    const _ = R({ x: t, y: e }, { x: o, y: n }, { x: a, y: l }), d = R({ x: t, y: e }, { x: a, y: l }, { x: r, y: c });
     if (_ < 5 || d < 5)
       return { hit: !0, type: "line" };
     const u = this._p2.price - this._p1.price, f = Math.min(o, a, r), m = Math.max(o, a, r);
@@ -3948,8 +3948,9 @@ class ri extends li {
 class ci {
   _container;
   _notifications = /* @__PURE__ */ new Map();
-  constructor() {
-    this._injectStyles(), this._container = this._createContainer(), document.body.appendChild(this._container);
+  _manager;
+  constructor(t) {
+    this._manager = t, this._injectStyles(), this._container = this._createContainer(), document.body.appendChild(this._container);
   }
   _injectStyles() {
     const t = "alert-notification-styles";
@@ -3958,8 +3959,7 @@ class ci {
     e.id = t, e.textContent = `
             .alert-notifications-container {
                 position: fixed;
-                top: 20px;
-                left: 20px;
+                /* Position set by JS */
                 z-index: 10000;
                 display: flex;
                 flex-direction: column;
@@ -4073,11 +4073,11 @@ class ci {
         `, document.head.appendChild(e);
   }
   show(t) {
-    this._notifications.has(t.alertId) && this.dismiss(t.alertId);
+    this._updatePosition(), this._notifications.has(t.alertId) && this.dismiss(t.alertId);
     const e = this._createNotification(t);
     this._container.appendChild(e), this._notifications.set(t.alertId, e), setTimeout(() => {
       this.dismiss(t.alertId);
-    }, 1e4), this._playAlarm();
+    }, 6e4), this._playAlarm();
   }
   _playAlarm() {
     try {
@@ -4094,6 +4094,14 @@ class ci {
     } catch (t) {
       console.error("Alarm sound failed:", t);
     }
+  }
+  _updatePosition() {
+    const t = this._manager.getChartRect();
+    if (t) {
+      const e = t.left + 15, i = window.innerHeight - t.bottom + 30;
+      this._container.style.left = `${e}px`, this._container.style.bottom = `${i}px`, this._container.style.top = "auto", this._container.style.right = "auto";
+    } else
+      this._container.style.left = "20px", this._container.style.bottom = "20px", this._container.style.top = "auto", this._container.style.right = "auto";
   }
   dismiss(t) {
     const e = this._notifications.get(t);
@@ -4222,7 +4230,7 @@ class hi extends Tt {
   attached(t) {
     super.attached(t), this.chart.subscribeClick(this._clickHandler), this.chart.subscribeCrosshairMove(this._moveHandler);
     const e = this.chart.chartElement?.();
-    e && (e.addEventListener("mousedown", this._mouseDownHandler), e.addEventListener("mouseup", this._mouseUpHandler), e.addEventListener("contextmenu", (i) => i.preventDefault())), window.addEventListener("mousemove", this._rawMouseMoveHandler), this._userPriceAlerts = new ri(), this.series.attachPrimitive(this._userPriceAlerts), this._alertNotifications = new ci(), this._userPriceAlerts.alertTriggered().subscribe((i) => {
+    e && (e.addEventListener("mousedown", this._mouseDownHandler), e.addEventListener("mouseup", this._mouseUpHandler), e.addEventListener("contextmenu", (i) => i.preventDefault())), window.addEventListener("mousemove", this._rawMouseMoveHandler), this._userPriceAlerts = new ri(), this.series.attachPrimitive(this._userPriceAlerts), this._alertNotifications = new ci(this), this._userPriceAlerts.alertTriggered().subscribe((i) => {
       this._alertNotifications?.show({
         alertId: i.alertId,
         symbol: "BTCUSD",
