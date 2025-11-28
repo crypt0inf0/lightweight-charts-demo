@@ -36,7 +36,7 @@ function at(h, t, e) {
     y: e.priceToCoordinate(s.price)
   }));
 }
-function T(h, t, e) {
+function v(h, t, e) {
   return {
     x: t.timeScale().logicalToCoordinate(h.logical),
     y: e.priceToCoordinate(h.price)
@@ -76,7 +76,7 @@ function E(h, t) {
   ], i = e[t] || e[0];
   h.setLineDash(i);
 }
-function x(h, t, e, i = "#FFFFFF", s = "#2962FF") {
+function g(h, t, e, i = "#FFFFFF", s = "#2962FF") {
   const o = h.context;
   o.fillStyle = i, o.strokeStyle = s, o.lineWidth = 2, o.beginPath(), o.arc(t, e, 6 * h.horizontalPixelRatio, 0, 2 * Math.PI), o.fill(), o.stroke();
 }
@@ -128,13 +128,13 @@ class Et {
     this.min = new w(Math.min(t.x, e.x), Math.min(t.y, e.y)), this.max = new w(Math.max(t.x, e.x), Math.max(t.y, e.y));
   }
 }
-function H(h, t) {
+function D(h, t) {
   return Math.abs(h.x - t.x) < 1e-6 && Math.abs(h.y - t.y) < 1e-6;
 }
 function At(h, t, e) {
   return { a: h, b: t, c: e };
 }
-function Lt(h, t) {
+function kt(h, t) {
   return At(h.y - t.y, t.x - h.x, h.x * t.y - t.x * h.y);
 }
 function O(h, t) {
@@ -142,11 +142,11 @@ function O(h, t) {
 }
 function _t(h, t) {
   for (let e = 0; e < h.length; e++)
-    if (H(h[e], t))
+    if (D(h[e], t))
       return !1;
   return h.push(t), !0;
 }
-function kt(h, t) {
+function Lt(h, t) {
   if (Math.abs(h.a) < 1e-6) {
     const o = -h.c / h.b;
     return t.min.y <= o && o <= t.max.y ? O(new w(t.min.x, o), new w(t.max.x, o)) : null;
@@ -168,7 +168,7 @@ function kt(h, t) {
     case 1:
       return e[0];
     case 2:
-      return H(e[0], e[1]) ? e[0] : O(e[0], e[1]);
+      return D(e[0], e[1]) ? e[0] : O(e[0], e[1]);
   }
   return null;
 }
@@ -193,20 +193,20 @@ function dt(h, t, e) {
   return s.length === 0 ? null : (s.sort((o, n) => o.t - n.t), s[0].p);
 }
 function wt(h, t, e, i, s, o) {
-  if (H(h, t))
+  if (D(h, t))
     return null;
   const n = new w(0, 0), a = new w(e, i), l = new Et(n, a);
   if (s)
     if (o) {
-      const r = kt(Lt(h, t), l);
+      const r = Lt(kt(h, t), l);
       return Array.isArray(r) ? r : null;
     } else {
       const r = dt(t, h, l);
-      return r === null || H(t, r) ? null : O(t, r);
+      return r === null || D(t, r) ? null : O(t, r);
     }
   if (o) {
     const r = dt(h, t, l);
-    return r === null || H(h, r) ? null : O(h, r);
+    return r === null || D(h, r) ? null : O(h, r);
   } else
     return O(h, t);
 }
@@ -217,7 +217,7 @@ function Ft(h, t, e) {
   const l = 5 * e * a, r = 1 * i;
   if (l * s * 0.2 <= r)
     return [];
-  const c = n.scaled(l), p = t.subtract(c), _ = n.transposed(), d = 1 * l, u = _.scaled(d), f = p.add(u), m = p.subtract(u), g = f.subtract(t).normalized().scaled(r), v = m.subtract(t).normalized().scaled(r), S = t.add(g), A = t.add(v), P = i * (s - 1), R = _.scaled(P), U = Math.min(l - 1 * i / s, i * s * 1), b = n.scaled(U), Mt = t.subtract(R), Vt = t.add(R), ht = t.subtract(b);
+  const c = n.scaled(l), p = t.subtract(c), _ = n.transposed(), d = 1 * l, u = _.scaled(d), f = p.add(u), m = p.subtract(u), x = f.subtract(t).normalized().scaled(r), T = m.subtract(t).normalized().scaled(r), S = t.add(x), A = t.add(T), P = i * (s - 1), R = _.scaled(P), U = Math.min(l - 1 * i / s, i * s * 1), b = n.scaled(U), Mt = t.subtract(R), Vt = t.add(R), ht = t.subtract(b);
   return [[f, S], [m, A], [Mt, ht.subtract(R)], [Vt, ht.add(R)]];
 }
 class Ot {
@@ -240,7 +240,7 @@ class Ot {
         !!this._options.extendLeft,
         !!this._options.extendRight
       );
-      _ && (i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.lineCap = "butt", E(i, this._options.lineStyle || 0), i.beginPath(), i.moveTo(_[0].x, _[0].y), i.lineTo(_[1].x, _[1].y), i.stroke(), i.setLineDash([])), this._options.leftEnd === 1 && this._drawArrow(i, r, l, this._options.width), this._options.rightEnd === 1 && this._drawArrow(i, l, r, this._options.width), this._selected && (x(e, s, o), x(e, n, a));
+      _ && (i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.lineCap = "butt", E(i, this._options.lineStyle || 0), i.beginPath(), i.moveTo(_[0].x, _[0].y), i.lineTo(_[1].x, _[1].y), i.stroke(), i.setLineDash([])), this._options.leftEnd === 1 && this._drawArrow(i, r, l, this._options.width), this._options.rightEnd === 1 && this._drawArrow(i, l, r, this._options.width), this._selected && (g(e, s, o), g(e, n, a));
     });
   }
   _drawArrow(t, e, i, s) {
@@ -253,7 +253,7 @@ class Ot {
     }
   }
 }
-class zt {
+class Ht {
   _source;
   _p1 = { x: null, y: null };
   _p2 = { x: null, y: null };
@@ -261,11 +261,11 @@ class zt {
     this._source = t;
   }
   update() {
-    this._p1 = T(
+    this._p1 = v(
       this._source._p1,
       this._source._chart,
       this._source._series
-    ), this._p2 = T(
+    ), this._p2 = v(
       this._source._p2,
       this._source._chart,
       this._source._series
@@ -280,7 +280,7 @@ class zt {
     );
   }
 }
-const Ht = {
+const Dt = {
   lineColor: "rgb(0, 0, 0)",
   width: 2,
   lineStyle: 0,
@@ -299,9 +299,9 @@ class Y {
   _selected = !1;
   constructor(t, e, i, s, o) {
     this._chart = t, this._series = e, this._p1 = i, this._p2 = s, this._options = {
-      ...Ht,
+      ...Dt,
       ...o
-    }, this._paneViews = [new zt(this)];
+    }, this._paneViews = [new Ht(this)];
   }
   /**
    * Update both points of the trend line
@@ -362,7 +362,7 @@ class Y {
     return this._paneViews;
   }
 }
-function Dt(h, t) {
+function zt(h, t) {
   const e = [
     [],
     // 0: Solid
@@ -395,7 +395,7 @@ class Wt {
     t.useBitmapCoordinateSpace((e) => {
       if (this._y === null) return;
       const i = e.context, s = It(this._y, e.verticalPixelRatio), o = e.mediaSize.width * e.horizontalPixelRatio;
-      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, Dt(i, this._options.lineStyle), i.beginPath(), i.moveTo(0, s), i.lineTo(o, s), i.stroke(), i.setLineDash([]), this._selected && Bt(e, o - 30 * e.horizontalPixelRatio, s);
+      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, zt(i, this._options.lineStyle), i.beginPath(), i.moveTo(0, s), i.lineTo(o, s), i.stroke(), i.setLineDash([]), this._selected && Bt(e, o - 30 * e.horizontalPixelRatio, s);
     });
   }
 }
@@ -488,7 +488,7 @@ class Xt {
     t.useBitmapCoordinateSpace((e) => {
       if (this._x === null || this._y === null) return;
       const i = e.context, s = y(this._x, e.horizontalPixelRatio), o = y(this._y, e.verticalPixelRatio), n = e.mediaSize.width * e.horizontalPixelRatio;
-      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, E(i, this._options.lineStyle), i.beginPath(), i.moveTo(s, o), i.lineTo(n, o), i.stroke(), i.setLineDash([]), this._selected && x(e, s, o);
+      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, E(i, this._options.lineStyle), i.beginPath(), i.moveTo(s, o), i.lineTo(n, o), i.stroke(), i.setLineDash([]), this._selected && g(e, s, o);
     });
   }
 }
@@ -577,7 +577,7 @@ class jt {
     t.useBitmapCoordinateSpace((e) => {
       if (this._x === null) return;
       const i = e.context, s = y(this._x, e.horizontalPixelRatio), o = e.mediaSize.height * e.verticalPixelRatio;
-      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, E(i, this._options.lineStyle), i.beginPath(), i.moveTo(s, 0), i.lineTo(s, o), i.stroke(), i.setLineDash([]), this._options.showLabel && this._text && this._drawTextLabel(e, this._text, s, o - 20 * e.verticalPixelRatio), this._selected && x(e, s, o - 30 * e.verticalPixelRatio);
+      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, E(i, this._options.lineStyle), i.beginPath(), i.moveTo(s, 0), i.lineTo(s, o), i.stroke(), i.setLineDash([]), this._options.showLabel && this._text && this._drawTextLabel(e, this._text, s, o - 20 * e.verticalPixelRatio), this._selected && g(e, s, o - 30 * e.verticalPixelRatio);
     });
   }
   _drawTextLabel(t, e, i, s) {
@@ -676,7 +676,7 @@ class Jt {
       if (this._p1.x === null || this._p1.y === null || this._p2.x === null || this._p2.y === null)
         return;
       const i = e.context, s = y(this._p1.x, e.horizontalPixelRatio), o = y(this._p1.y, e.verticalPixelRatio), n = y(this._p2.x, e.horizontalPixelRatio), a = y(this._p2.y, e.verticalPixelRatio), l = n - s, r = a - o;
-      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.fillStyle = this._options.backgroundColor, E(i, this._options.lineStyle), i.beginPath(), i.rect(s, o, l, r), i.fill(), i.stroke(), this._selected && (x(e, s, o), x(e, n, a), x(e, s, a), x(e, n, o));
+      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.fillStyle = this._options.backgroundColor, E(i, this._options.lineStyle), i.beginPath(), i.rect(s, o, l, r), i.fill(), i.stroke(), this._selected && (g(e, s, o), g(e, n, a), g(e, s, a), g(e, n, o));
     });
   }
 }
@@ -688,11 +688,11 @@ class Gt {
     this._source = t;
   }
   update() {
-    this._p1 = T(
+    this._p1 = v(
       this._source._p1,
       this._source._chart,
       this._source._series
-    ), this._p2 = T(
+    ), this._p2 = v(
       this._source._p2,
       this._source._chart,
       this._source._series
@@ -795,7 +795,7 @@ class te {
     this._source = t;
   }
   update() {
-    this._point = T(
+    this._point = v(
       this._source._point,
       this._source._chart,
       this._source._series
@@ -894,8 +894,8 @@ class se {
         const P = (a - o) / (n - s), R = o + P * (l - s);
         u = r - R;
       }
-      const f = o + u, m = a + u, g = s, v = n, S = o + u / 2, A = a + u / 2;
-      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.fillStyle = this._options.backgroundColor, E(i, this._options.lineStyle), i.beginPath(), i.moveTo(c, p), i.lineTo(_, d), i.lineTo(v, m), i.lineTo(g, f), i.closePath(), i.fill(), i.beginPath(), i.moveTo(c, p), i.lineTo(_, d), i.stroke(), i.beginPath(), i.moveTo(g, f), i.lineTo(v, m), i.stroke(), i.beginPath(), i.moveTo(c, p), i.lineTo(g, f), i.stroke(), i.beginPath(), i.moveTo(_, d), i.lineTo(v, m), i.stroke(), this._options.showMiddle && (i.setLineDash([5 * e.horizontalPixelRatio, 5 * e.horizontalPixelRatio]), i.beginPath(), i.moveTo(s, S), i.lineTo(n, A), i.stroke(), i.setLineDash([])), this._selected && (x(e, c, p), x(e, _, d), x(e, g, f), x(e, v, m));
+      const f = o + u, m = a + u, x = s, T = n, S = o + u / 2, A = a + u / 2;
+      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.fillStyle = this._options.backgroundColor, E(i, this._options.lineStyle), i.beginPath(), i.moveTo(c, p), i.lineTo(_, d), i.lineTo(T, m), i.lineTo(x, f), i.closePath(), i.fill(), i.beginPath(), i.moveTo(c, p), i.lineTo(_, d), i.stroke(), i.beginPath(), i.moveTo(x, f), i.lineTo(T, m), i.stroke(), i.beginPath(), i.moveTo(c, p), i.lineTo(x, f), i.stroke(), i.beginPath(), i.moveTo(_, d), i.lineTo(T, m), i.stroke(), this._options.showMiddle && (i.setLineDash([5 * e.horizontalPixelRatio, 5 * e.horizontalPixelRatio]), i.beginPath(), i.moveTo(s, S), i.lineTo(n, A), i.stroke(), i.setLineDash([])), this._selected && (g(e, c, p), g(e, _, d), g(e, x, f), g(e, T, m));
     });
   }
 }
@@ -908,15 +908,15 @@ class oe {
     this._source = t;
   }
   update() {
-    this._p1 = T(
+    this._p1 = v(
       this._source._p1,
       this._source._chart,
       this._source._series
-    ), this._p2 = T(
+    ), this._p2 = v(
       this._source._p2,
       this._source._chart,
       this._source._series
-    ), this._p3 = T(
+    ), this._p3 = v(
       this._source._p3,
       this._source._chart,
       this._source._series
@@ -939,7 +939,7 @@ const ne = {
   lineStyle: 0,
   showMiddle: !0
 };
-class D {
+class z {
   _chart;
   _series;
   _p1;
@@ -989,8 +989,8 @@ class D {
       return null;
     let p = 0;
     if (a !== o) {
-      const g = (l - n) / (a - o), v = n + g * (r - o);
-      p = c - v;
+      const x = (l - n) / (a - o), T = n + x * (r - o);
+      p = c - T;
     } else
       p = c - n;
     const _ = 8;
@@ -1039,7 +1039,7 @@ class le {
           const u = y(d, e.verticalPixelRatio);
           i.lineWidth = this._options.width, i.strokeStyle = p.color, i.beginPath(), i.moveTo(r, u), i.lineTo(c, u), i.stroke(), i.font = "10px Arial", i.fillStyle = p.color, i.fillText(`${p.coeff} (${_.toFixed(2)})`, r + 2, u - 2);
         }
-      }), this._selected && (x(e, s, n), x(e, o, a));
+      }), this._selected && (g(e, s, n), g(e, o, a));
     });
   }
 }
@@ -1051,11 +1051,11 @@ class ae {
     this._source = t;
   }
   update() {
-    this._p1 = T(
+    this._p1 = v(
       this._source._p1,
       this._source._chart,
       this._source._series
-    ), this._p2 = T(
+    ), this._p2 = v(
       this._source._p2,
       this._source._chart,
       this._source._series
@@ -1168,7 +1168,7 @@ class ce {
       if (this._p1.x === null || this._p1.y === null || this._p2.x === null || this._p2.y === null || this._p3.x === null || this._p3.y === null)
         return;
       const i = e.context, s = y(this._p1.x, e.horizontalPixelRatio), o = y(this._p1.y, e.verticalPixelRatio), n = y(this._p2.x, e.horizontalPixelRatio), a = y(this._p2.y, e.verticalPixelRatio), l = y(this._p3.x, e.horizontalPixelRatio), r = y(this._p3.y, e.verticalPixelRatio);
-      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.fillStyle = this._options.backgroundColor, E(i, this._options.lineStyle), i.beginPath(), i.moveTo(s, o), i.lineTo(n, a), i.lineTo(l, r), i.closePath(), i.fill(), i.stroke(), this._selected && (x(e, s, o), x(e, n, a), x(e, l, r));
+      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.fillStyle = this._options.backgroundColor, E(i, this._options.lineStyle), i.beginPath(), i.moveTo(s, o), i.lineTo(n, a), i.lineTo(l, r), i.closePath(), i.fill(), i.stroke(), this._selected && (g(e, s, o), g(e, n, a), g(e, l, r));
     });
   }
 }
@@ -1181,15 +1181,15 @@ class he {
     this._source = t;
   }
   update() {
-    this._p1 = T(
+    this._p1 = v(
       this._source._p1,
       this._source._chart,
       this._source._series
-    ), this._p2 = T(
+    ), this._p2 = v(
       this._source._p2,
       this._source._chart,
       this._source._series
-    ), this._p3 = T(
+    ), this._p3 = v(
       this._source._p3,
       this._source._chart,
       this._source._series
@@ -1326,7 +1326,7 @@ class _e {
         }
         if (i.stroke(), this._selected && !this._options.useSmoothCurve)
           for (const o of s)
-            x(e, o.x, o.y);
+            g(e, o.x, o.y);
         ct(i);
       }
     });
@@ -1377,7 +1377,7 @@ const K = {
   opacity: 1,
   useSmoothCurve: !0
 };
-class L {
+class k {
   _chart;
   _series;
   _points;
@@ -1460,11 +1460,11 @@ class ye {
     this._source = t;
   }
   update() {
-    this._p1 = T(
+    this._p1 = v(
       this._source._p1,
       this._source._chart,
       this._source._series
-    ), this._p2 = T(
+    ), this._p2 = v(
       this._source._p2,
       this._source._chart,
       this._source._series
@@ -1567,7 +1567,7 @@ class xe {
     t.useBitmapCoordinateSpace((e) => {
       if (this._point.x === null || this._point.y === null) return;
       const i = e.context, s = y(this._point.x, e.horizontalPixelRatio), o = y(this._point.y, e.verticalPixelRatio), n = e.mediaSize.width * e.horizontalPixelRatio, a = e.mediaSize.height * e.verticalPixelRatio;
-      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, E(i, this._options.lineStyle), i.beginPath(), i.moveTo(0, o), i.lineTo(n, o), i.stroke(), i.beginPath(), i.moveTo(s, 0), i.lineTo(s, a), i.stroke(), i.setLineDash([]), this._selected && x(e, s, o);
+      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, E(i, this._options.lineStyle), i.beginPath(), i.moveTo(0, o), i.lineTo(n, o), i.stroke(), i.beginPath(), i.moveTo(s, 0), i.lineTo(s, a), i.stroke(), i.setLineDash([]), this._selected && g(e, s, o);
     });
   }
 }
@@ -1578,7 +1578,7 @@ class ge {
     this._source = t;
   }
   update() {
-    this._point = T(
+    this._point = v(
       this._source._point,
       this._source._chart,
       this._source._series
@@ -1662,7 +1662,7 @@ class ve {
       if (this._p1.x === null || this._p1.y === null || this._p2.x === null || this._p2.y === null)
         return;
       const i = e.context, s = y(this._p1.x, e.horizontalPixelRatio), o = y(this._p1.y, e.verticalPixelRatio), n = y(this._p2.x, e.horizontalPixelRatio), a = y(this._p2.y, e.verticalPixelRatio), l = n - s, r = a - o, c = Math.sqrt(l * l + r * r);
-      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.fillStyle = this._options.backgroundColor, E(i, this._options.lineStyle), i.beginPath(), i.arc(s, o, c, 0, 2 * Math.PI), i.fill(), i.stroke(), this._selected && (x(e, s, o), x(e, n, a));
+      i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.lineWidth = this._options.width, i.strokeStyle = this._options.lineColor, i.fillStyle = this._options.backgroundColor, E(i, this._options.lineStyle), i.beginPath(), i.arc(s, o, c, 0, 2 * Math.PI), i.fill(), i.stroke(), this._selected && (g(e, s, o), g(e, n, a));
     });
   }
 }
@@ -1674,11 +1674,11 @@ class we {
     this._source = t;
   }
   update() {
-    this._p1 = T(
+    this._p1 = v(
       this._source._p1,
       this._source._chart,
       this._source._series
-    ), this._p2 = T(
+    ), this._p2 = v(
       this._source._p2,
       this._source._chart,
       this._source._series
@@ -1783,11 +1783,11 @@ class Pe {
         m > 0 ? (b = p, i.moveTo(u - f, b - f), i.lineTo(u, b), i.lineTo(u + f, b - f)) : (b = c, i.moveTo(u - f, b + f), i.lineTo(u, b), i.lineTo(u + f, b + f));
       }
       i.stroke();
-      const g = this._source._p1.price, v = this._source._p2.price, S = Math.abs(v - g), A = g !== 0 ? (v - g) / g * 100 : 0, R = `${v > g ? "+" : ""}${S.toFixed(2)} (${Math.abs(A).toFixed(2)}%)`, U = v > g ? p + 25 * e.verticalPixelRatio : c - 10 * e.verticalPixelRatio;
-      if (i.font = `bold ${14 * e.verticalPixelRatio}px sans-serif`, i.fillStyle = this._options.borderColor, i.textAlign = "center", i.textBaseline = v > g ? "top" : "bottom", i.fillText(R, u, U), this._selected) {
-        x(e, s, o), x(e, n, a), x(e, s, a), x(e, n, o);
+      const x = this._source._p1.price, T = this._source._p2.price, S = Math.abs(T - x), A = x !== 0 ? (T - x) / x * 100 : 0, R = `${T > x ? "+" : ""}${S.toFixed(2)} (${Math.abs(A).toFixed(2)}%)`, U = T > x ? p + 25 * e.verticalPixelRatio : c - 10 * e.verticalPixelRatio;
+      if (i.font = `bold ${14 * e.verticalPixelRatio}px sans-serif`, i.fillStyle = this._options.borderColor, i.textAlign = "center", i.textBaseline = T > x ? "top" : "bottom", i.fillText(R, u, U), this._selected) {
+        g(e, s, o), g(e, n, a), g(e, s, a), g(e, n, o);
         const b = (o + a) / 2;
-        x(e, u, o), x(e, u, a), x(e, s, b), x(e, n, b);
+        g(e, u, o), g(e, u, a), g(e, s, b), g(e, n, b);
       }
     });
   }
@@ -1800,11 +1800,11 @@ class be {
     this._source = t;
   }
   update() {
-    this._p1 = T(
+    this._p1 = v(
       this._source._p1,
       this._source._chart,
       this._source._series
-    ), this._p2 = T(
+    ), this._p2 = v(
       this._source._p2,
       this._source._chart,
       this._source._series
@@ -1894,9 +1894,9 @@ class tt {
       { x: p, y: f, index: 7 }
       // right center
     ];
-    for (const g of m)
-      if (Math.hypot(t - g.x, e - g.y) < r)
-        return { hit: !0, type: "point", index: g.index };
+    for (const x of m)
+      if (Math.hypot(t - x.x, e - x.y) < r)
+        return { hit: !0, type: "point", index: x.index };
     return vt({ x: t, y: e }, { x1: o, y1: n, x2: a, y2: l }) ? { hit: !0, type: "shape" } : null;
   }
   autoscaleInfo() {
@@ -1926,7 +1926,7 @@ class Me {
       if (this._p1.x === null || this._p1.y === null || this._p2.x === null || this._p2.y === null || this._p3.x === null || this._p3.y === null)
         return;
       const i = e.context, s = y(this._p1.x, e.horizontalPixelRatio), o = y(this._p1.y, e.verticalPixelRatio), n = y(this._p2.x, e.horizontalPixelRatio), a = y(this._p2.y, e.verticalPixelRatio), l = y(this._p3.x, e.horizontalPixelRatio), r = y(this._p3.y, e.verticalPixelRatio), c = Math.min(s, n, l), p = Math.max(s, n, l), _ = Math.max(p - c, 50 * e.horizontalPixelRatio), d = c + _;
-      i.fillStyle = this._options.profitColor, i.globalAlpha = this._options.zoneOpacity, i.fillRect(c, Math.min(o, r), _, Math.abs(r - o)), i.fillStyle = this._options.lossColor, i.fillRect(c, Math.min(o, a), _, Math.abs(a - o)), i.globalAlpha = 1, i.lineWidth = this._options.lineWidth, i.lineCap = "butt", i.strokeStyle = this._options.lineColor, i.beginPath(), i.moveTo(c, o), i.lineTo(d, o), i.stroke(), i.strokeStyle = this._options.profitLineColor, i.beginPath(), i.moveTo(c, r), i.lineTo(d, r), i.stroke(), i.strokeStyle = this._options.lossLineColor, i.beginPath(), i.moveTo(c, a), i.lineTo(d, a), i.stroke(), this._selected && (x(e, s, o, "#FFFFFF", "#2962FF"), x(e, n, a, "#FFFFFF", "#FF0000"), x(e, l, r, "#FFFFFF", "#00FF00"));
+      i.fillStyle = this._options.profitColor, i.globalAlpha = this._options.zoneOpacity, i.fillRect(c, Math.min(o, r), _, Math.abs(r - o)), i.fillStyle = this._options.lossColor, i.fillRect(c, Math.min(o, a), _, Math.abs(a - o)), i.globalAlpha = 1, i.lineWidth = this._options.lineWidth, i.lineCap = "butt", i.strokeStyle = this._options.lineColor, i.beginPath(), i.moveTo(c, o), i.lineTo(d, o), i.stroke(), i.strokeStyle = this._options.profitLineColor, i.beginPath(), i.moveTo(c, r), i.lineTo(d, r), i.stroke(), i.strokeStyle = this._options.lossLineColor, i.beginPath(), i.moveTo(c, a), i.lineTo(d, a), i.stroke(), this._selected && (g(e, s, o, "#FFFFFF", "#2962FF"), g(e, n, a, "#FFFFFF", "#FF0000"), g(e, l, r, "#FFFFFF", "#00FF00"));
     });
   }
 }
@@ -1939,7 +1939,7 @@ class Ve {
     this._source = t;
   }
   update() {
-    this._p1 = T(this._source._p1, this._source._chart, this._source._series), this._p2 = T(this._source._p2, this._source._chart, this._source._series), this._p3 = T(this._source._p3, this._source._chart, this._source._series);
+    this._p1 = v(this._source._p1, this._source._chart, this._source._series), this._p2 = v(this._source._p2, this._source._chart, this._source._series), this._p3 = v(this._source._p3, this._source._chart, this._source._series);
   }
   renderer() {
     return new Me(
@@ -1999,8 +1999,8 @@ class W {
     if (Math.hypot(t - o, e - n) < p) return { hit: !0, type: "point", index: 0 };
     if (Math.hypot(t - a, e - l) < p) return { hit: !0, type: "point", index: 1 };
     if (Math.hypot(t - r, e - c) < p) return { hit: !0, type: "point", index: 2 };
-    const _ = Math.min(o, a, r), d = Math.max(o, a, r), u = window.devicePixelRatio || 1, f = Math.max(d - _, 50 * u), m = _ + f, g = Math.min(n, l, c), v = Math.max(n, l, c);
-    return t >= _ && t <= m && e >= g && e <= v ? { hit: !0, type: "shape" } : null;
+    const _ = Math.min(o, a, r), d = Math.max(o, a, r), u = window.devicePixelRatio || 1, f = Math.max(d - _, 50 * u), m = _ + f, x = Math.min(n, l, c), T = Math.max(n, l, c);
+    return t >= _ && t <= m && e >= x && e <= T ? { hit: !0, type: "shape" } : null;
   }
   autoscaleInfo() {
     return null;
@@ -2029,7 +2029,7 @@ class Ee {
       if (this._p1.x === null || this._p1.y === null || this._p2.x === null || this._p2.y === null || this._p3.x === null || this._p3.y === null)
         return;
       const i = e.context, s = y(this._p1.x, e.horizontalPixelRatio), o = y(this._p1.y, e.verticalPixelRatio), n = y(this._p2.x, e.horizontalPixelRatio), a = y(this._p2.y, e.verticalPixelRatio), l = y(this._p3.x, e.horizontalPixelRatio), r = y(this._p3.y, e.verticalPixelRatio), c = Math.min(s, n, l), p = Math.max(s, n, l), _ = Math.max(p - c, 50 * e.horizontalPixelRatio), d = c + _;
-      i.fillStyle = this._options.profitColor, i.globalAlpha = this._options.zoneOpacity, i.fillRect(c, Math.min(o, r), _, Math.abs(r - o)), i.fillStyle = this._options.lossColor, i.fillRect(c, Math.min(o, a), _, Math.abs(a - o)), i.globalAlpha = 1, i.lineWidth = this._options.lineWidth, i.lineCap = "butt", i.strokeStyle = this._options.lineColor, i.beginPath(), i.moveTo(c, o), i.lineTo(d, o), i.stroke(), i.strokeStyle = this._options.profitLineColor, i.beginPath(), i.moveTo(c, r), i.lineTo(d, r), i.stroke(), i.strokeStyle = this._options.lossLineColor, i.beginPath(), i.moveTo(c, a), i.lineTo(d, a), i.stroke(), this._selected && (x(e, s, o, "#FFFFFF", "#2962FF"), x(e, n, a, "#FFFFFF", "#FF0000"), x(e, l, r, "#FFFFFF", "#00FF00"));
+      i.fillStyle = this._options.profitColor, i.globalAlpha = this._options.zoneOpacity, i.fillRect(c, Math.min(o, r), _, Math.abs(r - o)), i.fillStyle = this._options.lossColor, i.fillRect(c, Math.min(o, a), _, Math.abs(a - o)), i.globalAlpha = 1, i.lineWidth = this._options.lineWidth, i.lineCap = "butt", i.strokeStyle = this._options.lineColor, i.beginPath(), i.moveTo(c, o), i.lineTo(d, o), i.stroke(), i.strokeStyle = this._options.profitLineColor, i.beginPath(), i.moveTo(c, r), i.lineTo(d, r), i.stroke(), i.strokeStyle = this._options.lossLineColor, i.beginPath(), i.moveTo(c, a), i.lineTo(d, a), i.stroke(), this._selected && (g(e, s, o, "#FFFFFF", "#2962FF"), g(e, n, a, "#FFFFFF", "#FF0000"), g(e, l, r, "#FFFFFF", "#00FF00"));
     });
   }
 }
@@ -2042,7 +2042,7 @@ class Ae {
     this._source = t;
   }
   update() {
-    this._p1 = T(this._source._p1, this._source._chart, this._source._series), this._p2 = T(this._source._p2, this._source._chart, this._source._series), this._p3 = T(this._source._p3, this._source._chart, this._source._series);
+    this._p1 = v(this._source._p1, this._source._chart, this._source._series), this._p2 = v(this._source._p2, this._source._chart, this._source._series), this._p3 = v(this._source._p3, this._source._chart, this._source._series);
   }
   renderer() {
     return new Ee(
@@ -2054,7 +2054,7 @@ class Ae {
     );
   }
 }
-const Le = {
+const ke = {
   lineColor: "#787B86",
   profitColor: "rgba(0, 255, 0, 0.2)",
   lossColor: "rgba(255, 0, 0, 0.2)",
@@ -2078,7 +2078,7 @@ class N {
   _selected = !1;
   constructor(t, e, i, s, o, n) {
     this._chart = t, this._series = e, this._p1 = i, this._p2 = s, this._p3 = o, this._options = {
-      ...Le,
+      ...ke,
       ...n
     }, this._paneViews = [new Ae(this)];
   }
@@ -2102,8 +2102,8 @@ class N {
     if (Math.hypot(t - o, e - n) < p) return { hit: !0, type: "point", index: 0 };
     if (Math.hypot(t - a, e - l) < p) return { hit: !0, type: "point", index: 1 };
     if (Math.hypot(t - r, e - c) < p) return { hit: !0, type: "point", index: 2 };
-    const _ = Math.min(o, a, r), d = Math.max(o, a, r), u = window.devicePixelRatio || 1, f = Math.max(d - _, 50 * u), m = _ + f, g = Math.min(n, l, c), v = Math.max(n, l, c);
-    return t >= _ && t <= m && e >= g && e <= v ? { hit: !0, type: "shape" } : null;
+    const _ = Math.min(o, a, r), d = Math.max(o, a, r), u = window.devicePixelRatio || 1, f = Math.max(d - _, 50 * u), m = _ + f, x = Math.min(n, l, c), T = Math.max(n, l, c);
+    return t >= _ && t <= m && e >= x && e <= T ? { hit: !0, type: "shape" } : null;
   }
   autoscaleInfo() {
     return null;
@@ -2115,7 +2115,7 @@ class N {
     return this._paneViews;
   }
 }
-class ke {
+class Le {
   _points;
   _options;
   _selected;
@@ -2152,7 +2152,7 @@ class ke {
       }
       if (this._selected)
         for (const n of s)
-          x(e, n.x, n.y);
+          g(e, n.x, n.y);
       ct(i);
     });
   }
@@ -2171,7 +2171,7 @@ class Fe {
     );
   }
   renderer() {
-    return new ke(this._points, this._source._options, this._source._selected);
+    return new Le(this._points, this._source._options, this._source._selected);
   }
 }
 const Oe = {
@@ -2233,7 +2233,7 @@ class et {
     return this._paneViews;
   }
 }
-class ze {
+class He {
   _points;
   _options;
   _selected;
@@ -2270,12 +2270,12 @@ class ze {
       }
       if (this._selected)
         for (const n of s)
-          x(e, n.x, n.y);
+          g(e, n.x, n.y);
       ct(i);
     });
   }
 }
-class He {
+class De {
   _source;
   _points = [];
   constructor(t) {
@@ -2289,10 +2289,10 @@ class He {
     );
   }
   renderer() {
-    return new ze(this._points, this._source._options, this._source._selected);
+    return new He(this._points, this._source._options, this._source._selected);
   }
 }
-const De = {
+const ze = {
   lineColor: "#2962FF",
   width: 2,
   textColor: "#2962FF"
@@ -2306,9 +2306,9 @@ class it {
   _selected = !1;
   constructor(t, e, i, s) {
     this._chart = t, this._series = e, this._points = i, this._options = {
-      ...De,
+      ...ze,
       ...s
-    }, this._paneViews = [new He(this)];
+    }, this._paneViews = [new De(this)];
   }
   updatePoints(t) {
     this._points = t, this.updateAllViews();
@@ -2374,8 +2374,8 @@ class Be {
         m > 0 ? (P = r, i.moveTo(P - f, u - f), i.lineTo(P, u), i.lineTo(P - f, u + f)) : (P = l, i.moveTo(P + f, u - f), i.lineTo(P, u), i.lineTo(P + f, u + f));
       }
       i.stroke();
-      const g = this._source._p1.logical, v = this._source._p2.logical, A = `${Math.abs(v - g)} bars`;
-      i.font = `bold ${14 * e.verticalPixelRatio}px sans-serif`, i.fillStyle = this._options.borderColor, i.textAlign = "center", i.textBaseline = "bottom", i.fillText(A, (l + r) / 2, p - 5 * e.verticalPixelRatio), this._selected && (x(e, s, o), x(e, n, a), x(e, s, a), x(e, n, o));
+      const x = this._source._p1.logical, T = this._source._p2.logical, A = `${Math.abs(T - x)} bars`;
+      i.font = `bold ${14 * e.verticalPixelRatio}px sans-serif`, i.fillStyle = this._options.borderColor, i.textAlign = "center", i.textBaseline = "bottom", i.fillText(A, (l + r) / 2, p - 5 * e.verticalPixelRatio), this._selected && (g(e, s, o), g(e, n, a), g(e, s, a), g(e, n, o));
     });
   }
 }
@@ -2387,11 +2387,11 @@ class Ie {
     this._source = t;
   }
   update() {
-    this._p1 = T(
+    this._p1 = v(
       this._source._p1,
       this._source._chart,
       this._source._series
-    ), this._p2 = T(
+    ), this._p2 = v(
       this._source._p2,
       this._source._chart,
       this._source._series
@@ -2481,10 +2481,10 @@ class Ne {
         if (f !== null) {
           const m = y(f, e.verticalPixelRatio);
           i.lineWidth = this._options.width, i.strokeStyle = d.color, i.beginPath(), i.moveTo(p, m), i.lineTo(_, m), i.stroke(), i.font = "10px Arial", i.fillStyle = d.color;
-          const g = (d.coeff * 100).toFixed(1);
-          i.fillText(`${g}% (${u.toFixed(2)})`, p + 2, m - 2);
+          const x = (d.coeff * 100).toFixed(1);
+          i.fillText(`${x}% (${u.toFixed(2)})`, p + 2, m - 2);
         }
-      }), this._selected && (x(e, s, a), x(e, o, l), x(e, n, r));
+      }), this._selected && (g(e, s, a), g(e, o, l), g(e, n, r));
     });
   }
 }
@@ -2497,15 +2497,15 @@ class $e {
     this._source = t;
   }
   update() {
-    this._p1 = T(
+    this._p1 = v(
       this._source._p1,
       this._source._chart,
       this._source._series
-    ), this._p2 = T(
+    ), this._p2 = v(
       this._source._p2,
       this._source._chart,
       this._source._series
-    ), this._p3 = T(
+    ), this._p3 = v(
       this._source._p3,
       this._source._chart,
       this._source._series
@@ -2575,8 +2575,8 @@ class $ {
     if (_ < 5 || d < 5)
       return { hit: !0, type: "line" };
     const u = this._p2.price - this._p1.price, f = Math.min(o, a, r), m = Math.max(o, a, r);
-    for (const g of this._options.levels) {
-      const v = this._p3.price + u * g.coeff, S = s.priceToCoordinate(v);
+    for (const x of this._options.levels) {
+      const T = this._p3.price + u * x.coeff, S = s.priceToCoordinate(T);
       if (S !== null && Math.abs(e - S) < 5 && t >= f && t <= m)
         return { hit: !0, type: "line" };
     }
@@ -2590,7 +2590,7 @@ class $ {
   }
 }
 const ot = "lineTool_templates", ft = 20;
-class z {
+class H {
   /**
    * Generate a unique ID for templates
    */
@@ -2682,27 +2682,26 @@ class C {
   _savedPosition = null;
   // Icons matching the "thin stroke" style of the provided images
   static ICONS = {
-    // 6-dot grid handle
-    drag: '<svg viewBox="0 0 24 24"><circle cx="8.5" cy="8.5" r="1.5"/><circle cx="8.5" cy="15.5" r="1.5"/><circle cx="15.5" cy="8.5" r="1.5"/><circle cx="15.5" cy="15.5" r="1.5"/><circle cx="8.5" cy="12" r="1.5"/><circle cx="15.5" cy="12" r="1.5"/></svg>',
-    // Grid with plus (Templates)
-    template: '<svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z"/><path d="M17 14h-3v6h-3v-3h-3v-3h3v-3h3v3h3z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>',
-    // Simplified placeholder for Layouts
+    // 6-dot grid handle (Standard TV style)
+    drag: '<svg width="24" height="24" viewBox="0 0 24 24" fill="#BFBFBF"> <circle cx="9" cy="7"  r="1.6"/> <circle cx="15" cy="7"  r="1.6"/> <circle cx="9" cy="12" r="1.6"/> <circle cx="15" cy="12" r="1.6"/> <circle cx="9" cy="17" r="1.6"/> <circle cx="15" cy="17" r="1.6"/> </svg>',
+    // Templates (Grid Layout)
+    template: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <!-- Top Left --> <rect x="3.5" y="3.5" width="7" height="7" rx="2"/> <!-- Top Right --> <rect x="13.5" y="3.5" width="7" height="7" rx="2"/> <!-- Bottom Left --> <rect x="3.5" y="13.5" width="7" height="7" rx="2"/> <!-- Plus Symbol (replaces bottom-right square) --> <line x1="17" y1="14.5" x2="17" y2="20.5"/> <line x1="14.5" y1="17.5" x2="19.5" y2="17.5"/> </svg>',
     // Pencil (Line Color)
     brush: '<svg viewBox="0 0 24 24"><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg>',
     // Text 'T'
     text: '<svg viewBox="0 0 24 24"><path d="M5 4v3h5.5v12h3V7H19V4z"/></svg>',
     // Paint Bucket (Fill)
     fill: '<svg viewBox="0 0 24 24"><path d="M16.56 8.94L7.62 0 6.21 1.41l2.38 2.38-5.15 5.15c-.59.59-.59 1.54 0 2.12l5.5 5.5c.29.29.68.44 1.06.44s.77-.15 1.06-.44l5.5-5.5c.59-.58.59-1.53 0-2.12zM5.21 10L10 5.21 14.79 10H5.21zM19 11.5s-2 2.17-2 3.5c0 1.1.9 2 2 2s2-.9 2-2c0-1.33-2-3.5-2-3.5z"/><path d="M0 20h24v4H0z"/></svg>',
-    // Settings (Hexagon)
-    settings: '<svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.488.488 0 0 0-.59.22L2.09 8.87a.49.49 0 0 0 .12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>',
-    // Alert (Clock with +)
-    alert: '<svg viewBox="0 0 24 24"><path d="M22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM7.88 3.39L6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM12.5 8H11v4H7v1.5h4V18h1.5v-4.5H17V12h-4.5V8zM12 4c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>',
+    // Settings (Gear) - Sleek
+    settings: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>',
+    // Alert (Stopwatch +)
+    alert: '<svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z" stroke="currentColor" fill="none" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.5"/><path d="M9 2h6" stroke="currentColor" stroke-width="1.5"/></svg>',
     // Lock
-    lock: '<svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>',
+    lock: '<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" fill="none" stroke-width="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" fill="none" stroke-width="1.5"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>',
     // Trash
-    delete: '<svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>',
+    delete: '<svg viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="currentColor" fill="none" stroke-width="1.5"/></svg>',
     // More
-    more: '<svg viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>'
+    more: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/><circle cx="5" cy="12" r="1.5" fill="currentColor"/></svg>'
   };
   constructor(t) {
     this._manager = t, this._container = document.createElement("div"), this._container.className = "tv-floating-toolbar hidden", document.body.appendChild(this._container);
@@ -2720,14 +2719,23 @@ class C {
     if (this._savedPosition)
       this._show(this._savedPosition.x, this._savedPosition.y);
     else {
-      const t = this._container.getBoundingClientRect(), e = window.innerWidth - t.width - 100;
-      this._show(e, 100);
+      const t = this._manager.getChartRect(), e = this._container.getBoundingClientRect();
+      if (t) {
+        const i = t.right - e.width - 100, s = t.top + 15;
+        this._show(i, s);
+      } else {
+        const i = window.innerWidth - e.width - 100;
+        this._show(i, 100);
+      }
     }
   }
   updatePosition(t, e) {
     if (this._container.classList.contains("hidden")) return;
-    const i = this._container.getBoundingClientRect(), s = window.innerWidth - i.width - 10, o = window.innerHeight - i.height - 10, n = Math.min(Math.max(10, t), s), a = Math.min(Math.max(10, e), o);
-    this._container.style.left = `${n}px`, this._container.style.top = `${a}px`;
+    const i = this._container.getBoundingClientRect(), s = this._manager.getChartRect();
+    let o = 10, n = 10, a = window.innerWidth - i.width - 10, l = window.innerHeight - i.height - 10;
+    s && (o = s.left, n = s.top, a = s.right - i.width, l = s.bottom - i.height);
+    const r = Math.min(Math.max(o, t), a), c = Math.min(Math.max(n, e), l);
+    this._container.style.left = `${r}px`, this._container.style.top = `${c}px`;
   }
   _show(t, e) {
     this._container.classList.remove("hidden"), this.updatePosition(t, e);
@@ -2820,7 +2828,7 @@ class C {
     }), t.appendChild(i);
     const s = document.createElement("div");
     s.className = "tv-template-item", s.innerHTML = "<span>Apply Default Drawing Template</span>", t.appendChild(s);
-    const o = z.loadTemplates();
+    const o = H.loadTemplates();
     if (o.length > 0) {
       const n = document.createElement("div");
       n.className = "tv-dropdown-separator", t.appendChild(n), o.forEach((a) => {
@@ -2829,9 +2837,9 @@ class C {
                     <span class="tv-template-item__name">${this._escapeHtml(a.name)}</span>
                     <button class="tv-template-item__delete" title="Delete template">×</button>
                 `, l.querySelector(".tv-template-item__name")?.addEventListener("click", () => {
-          z.applyTemplate(a.id, e) && this._renderExpanded(e);
+          H.applyTemplate(a.id, e) && this._renderExpanded(e);
         }), l.querySelector(".tv-template-item__delete")?.addEventListener("click", (r) => {
-          r.stopPropagation(), z.deleteTemplate(a.id) && (t.innerHTML = "", this._createTemplateList(t, e));
+          r.stopPropagation(), H.deleteTemplate(a.id) && (t.innerHTML = "", this._createTemplateList(t, e));
         }), t.appendChild(l);
       });
     }
@@ -2944,17 +2952,17 @@ class C {
     l.style.left = `${d}%`, r.innerText = `${d}%`;
     const u = (f) => {
       const m = a.getBoundingClientRect();
-      let g = f - m.left;
-      g = Math.max(0, Math.min(g, m.width));
-      const v = Math.round(g / m.width * 100);
-      l.style.left = `${v}%`, r.innerText = `${v}%`, this._applyOpacity(e, v / 100, i);
+      let x = f - m.left;
+      x = Math.max(0, Math.min(x, m.width));
+      const T = Math.round(x / m.width * 100);
+      l.style.left = `${T}%`, r.innerText = `${T}%`, this._applyOpacity(e, T / 100, i);
     };
     a.addEventListener("mousedown", (f) => {
       u(f.clientX);
-      const m = (v) => u(v.clientX), g = () => {
-        document.removeEventListener("mousemove", m), document.removeEventListener("mouseup", g);
+      const m = (T) => u(T.clientX), x = () => {
+        document.removeEventListener("mousemove", m), document.removeEventListener("mouseup", x);
       };
-      document.addEventListener("mousemove", m), document.addEventListener("mouseup", g), f.preventDefault();
+      document.addEventListener("mousemove", m), document.addEventListener("mouseup", x), f.preventDefault();
     });
   }
   _updateOpacitySlider(t, e) {
@@ -2998,8 +3006,8 @@ class C {
   _saveTemplate(t) {
     const e = prompt("Enter template name:");
     if (!e) return;
-    const i = z.extractStyles(t);
-    z.saveTemplate(e, i);
+    const i = H.extractStyles(t);
+    H.saveTemplate(e, i);
   }
   _escapeHtml(t) {
     const e = document.createElement("div");
@@ -3010,8 +3018,9 @@ class C {
     const e = t.clientX, i = t.clientY, s = this._container.getBoundingClientRect(), o = s.left, n = s.top, a = (r) => {
       const c = r.clientX - e, p = r.clientY - i;
       let _ = o + c, d = n + p;
-      const u = window.innerWidth - s.width, f = window.innerHeight - s.height;
-      _ = Math.max(0, Math.min(_, u)), d = Math.max(0, Math.min(d, f)), this._container.style.left = `${_}px`, this._container.style.top = `${d}px`;
+      const u = this._manager.getChartRect();
+      let f = 0, m = 0, x = window.innerWidth - s.width, T = window.innerHeight - s.height;
+      u && (f = u.left, m = u.top, x = u.right - s.width, T = u.bottom - s.height), _ = Math.max(f, Math.min(_, x)), d = Math.max(m, Math.min(d, T)), this._container.style.left = `${_}px`, this._container.style.top = `${d}px`;
     }, l = () => {
       document.removeEventListener("mousemove", a), document.removeEventListener("mouseup", l);
       const r = this._container.getBoundingClientRect();
@@ -3089,7 +3098,7 @@ class qe extends Tt {
     })), this.requestUpdate();
   }
 }
-const X = 21, Ct = 21, Ze = 17, nt = 4, Je = 2, yt = 13, mt = 13, xt = 50, Pt = 5.81, k = 26, bt = 20, lt = 9, Ge = [
+const X = 21, Ct = 21, Ze = 17, nt = 4, Je = 2, yt = 13, mt = 13, xt = 50, Pt = 5.81, L = 26, bt = 20, lt = 9, Ge = [
   new Path2D(
     "M5.34004 1.12254C4.7902 0.438104 3.94626 0 3 0C1.34315 0 0 1.34315 0 3C0 3.94626 0.438104 4.7902 1.12254 5.34004C1.04226 5.714 1 6.10206 1 6.5C1 9.36902 3.19675 11.725 6 11.9776V10.9725C3.75002 10.7238 2 8.81628 2 6.5C2 4.01472 4.01472 2 6.5 2C8.81628 2 10.7238 3.75002 10.9725 6H11.9776C11.9574 5.77589 11.9237 5.55565 11.8775 5.34011C12.562 4.79026 13.0001 3.9463 13.0001 3C13.0001 1.34315 11.6569 0 10.0001 0C9.05382 0 8.20988 0.438111 7.66004 1.12256C7.28606 1.04227 6.89797 1 6.5 1C6.10206 1 5.714 1.04226 5.34004 1.12254ZM4.28255 1.46531C3.93534 1.17484 3.48809 1 3 1C1.89543 1 1 1.89543 1 3C1 3.48809 1.17484 3.93534 1.46531 4.28255C2.0188 3.02768 3.02768 2.0188 4.28255 1.46531ZM8.71751 1.46534C9.97237 2.01885 10.9812 3.02774 11.5347 4.28262C11.8252 3.93541 12.0001 3.48812 12.0001 3C12.0001 1.89543 11.1047 1 10.0001 1C9.51199 1 9.06472 1.17485 8.71751 1.46534Z"
   ),
@@ -3304,7 +3313,7 @@ class si extends St {
     });
   }
   _calculateLabelWidth(t) {
-    return lt * 2 + k + t * Pt;
+    return lt * 2 + L + t * Pt;
   }
   _drawAlertLabel(t) {
     if (!this._data?.alerts) return;
@@ -3329,11 +3338,11 @@ class si extends St {
         n.length,
         a
       ), e.fillStyle = "#FFFFFF", e.fill();
-      const l = o.position + o.length - k * t.horizontalPixelRatio;
+      const l = o.position + o.length - L * t.horizontalPixelRatio;
       i.hoverRemove && (e.beginPath(), e.roundRect(
         l,
         n.position,
-        k * t.horizontalPixelRatio,
+        L * t.horizontalPixelRatio,
         n.length,
         [0, a, a, 0]
       ), e.fillStyle = "#F0F3FA", e.fill()), e.beginPath();
@@ -3360,7 +3369,7 @@ class si extends St {
       ), e.beginPath();
       const c = 9;
       e.translate(
-        l + t.horizontalPixelRatio * (k - c) / 2,
+        l + t.horizontalPixelRatio * (L - c) / 2,
         (i.y - 5) * t.verticalPixelRatio
       );
       const p = c / Qe * t.horizontalPixelRatio;
@@ -3706,8 +3715,8 @@ class ai {
       { value: "crossing_up", label: "Crossing Up" },
       { value: "crossing_down", label: "Crossing Down" }
     ].forEach((m) => {
-      const g = document.createElement("option");
-      g.value = m.value, g.textContent = m.label, m.value === this._currentData?.condition && (g.selected = !0), l.appendChild(g);
+      const x = document.createElement("option");
+      x.value = m.value, x.textContent = m.label, m.value === this._currentData?.condition && (x.selected = !0), l.appendChild(x);
     }), n.appendChild(l), o.appendChild(n);
     const c = document.createElement("div");
     c.className = "alert-edit-form-group";
@@ -3857,8 +3866,8 @@ class ri extends li {
   }
   _isHoveringRemoveButton(t, e, i, s) {
     if (!t || !e || Math.abs(t.y - i) > bt / 2) return !1;
-    const n = lt * 2 + k + s * Pt, a = (e + n - k) * 0.5;
-    return Math.abs(t.x - a) <= k / 2;
+    const n = lt * 2 + L + s * Pt, a = (e + n - L) * 0.5;
+    return Math.abs(t.x - a) <= L / 2;
   }
   _hoveringID = "";
   /**
@@ -4255,6 +4264,9 @@ class hi extends Tt {
     const e = new qe(t);
     this.series.attachPrimitive(e), this._tools.push(e);
   }
+  getChartRect() {
+    return this.chart.chartElement?.()?.getBoundingClientRect() || null;
+  }
   /**
    * Select a tool and show its anchor points
    */
@@ -4371,7 +4383,7 @@ class hi extends Tt {
     }
     if (t.button === 0 && this._isDrawing && (t.preventDefault(), t.stopPropagation(), this._isDrawing = !1, this._activeTool && this._selectTool(this._activeTool), this._activeTool = null, this._points = []), t.button === 2) {
       if (t.preventDefault(), this._activeToolType === "Path" && this._points.length >= 2) {
-        this._activeTool instanceof L && this._activeTool.updatePoints([...this._points]);
+        this._activeTool instanceof k && this._activeTool.updatePoints([...this._points]);
         const e = this._activeTool;
         this._activeTool = null, this._points = [], this._selectTool(e), this._isRightClick = !1;
         return;
@@ -4401,9 +4413,9 @@ class hi extends Tt {
     if (this._points.length === 0) {
       this._points.push(r), this._lastPixelPoint = { x: s, y: o };
       const d = this._activeToolType === "Brush" ? K.brush : K.highlighter, u = this.getToolOptions(this._activeToolType), f = { ...d, ...u };
-      f.lineColor && (f.color = f.lineColor), this._activeTool = new L(this.chart, this.series, [r], f), this.series.attachPrimitive(this._activeTool), this._addTool(this._activeTool, this._activeToolType);
+      f.lineColor && (f.color = f.lineColor), this._activeTool = new k(this.chart, this.series, [r], f), this.series.attachPrimitive(this._activeTool), this._addTool(this._activeTool, this._activeToolType);
     } else
-      this._activeTool instanceof L && (this._activeTool.addPoint(r), this._lastPixelPoint = { x: s, y: o }, this.chart.timeScale().applyOptions({}));
+      this._activeTool instanceof k && (this._activeTool.addPoint(r), this._lastPixelPoint = { x: s, y: o }, this.chart.timeScale().applyOptions({}));
   };
   _clickHandler = (t) => {
     if (this._isRightClick)
@@ -4494,13 +4506,13 @@ class hi extends Tt {
     } else if (this._activeToolType === "ParallelChannel") {
       if (a && (this._points[this._points.length - 1] = a), this._points.length === 1) {
         const l = this._points[0];
-        this._activeTool = new D(this.chart, this.series, l, l, l, this.getToolOptions(this._activeToolType)), this.series.attachPrimitive(this._activeTool), this._addTool(this._activeTool, this._activeToolType);
+        this._activeTool = new z(this.chart, this.series, l, l, l, this.getToolOptions(this._activeToolType)), this.series.attachPrimitive(this._activeTool), this._addTool(this._activeTool, this._activeToolType);
       } else if (this._points.length === 2) {
-        if (this._activeTool instanceof D) {
+        if (this._activeTool instanceof z) {
           const l = this._points[1];
           this._activeTool.updatePoints(this._activeTool._p1, l, this._activeTool._p3);
         }
-      } else if (this._points.length === 3 && this._activeTool instanceof D) {
+      } else if (this._points.length === 3 && this._activeTool instanceof z) {
         const l = this._points[2];
         this._activeTool.updatePoints(this._activeTool._p1, this._activeTool._p2, l);
         const r = this._activeTool;
@@ -4657,7 +4669,7 @@ class hi extends Tt {
       if (l - this._lastClickTime < 300 && this._lastClickPoint && t.point) {
         const c = Math.abs(t.point.x - this._lastClickPoint.x), p = Math.abs(t.point.y - this._lastClickPoint.y);
         if (c < 10 && p < 10 && this._points.length >= 2) {
-          this._points.pop(), this._activeTool instanceof L && this._activeTool.updatePoints([...this._points]);
+          this._points.pop(), this._activeTool instanceof k && this._activeTool.updatePoints([...this._points]);
           const _ = this._activeTool;
           this._activeTool = null, this._points = [], this._lastClickTime = 0, this._lastClickPoint = null, this._selectTool(_);
           return;
@@ -4665,8 +4677,8 @@ class hi extends Tt {
       }
       if (this._lastClickTime = l, this._lastClickPoint = t.point ? { x: t.point.x, y: t.point.y } : null, this._points.length === 1) {
         const c = { ...K.path, ...this.getToolOptions(this._activeToolType) };
-        this._activeTool = new L(this.chart, this.series, [...this._points], c), this.series.attachPrimitive(this._activeTool), this._addTool(this._activeTool, this._activeToolType);
-      } else this._activeTool instanceof L && this._activeTool.updatePoints([...this._points]);
+        this._activeTool = new k(this.chart, this.series, [...this._points], c), this.series.attachPrimitive(this._activeTool), this._addTool(this._activeTool, this._activeToolType);
+      } else this._activeTool instanceof k && this._activeTool.updatePoints([...this._points]);
     }
   };
   _addTool(t, e) {
@@ -4701,7 +4713,7 @@ class hi extends Tt {
           const r = { logical: l, price: e }, c = this._points[0];
           this._activeTool.updatePoints(c, r), this.chart.timeScale().applyOptions({});
         }
-      } else if (this._activeToolType === "ParallelChannel" && this._activeTool instanceof D) {
+      } else if (this._activeToolType === "ParallelChannel" && this._activeTool instanceof z) {
         const n = this.chart.timeScale(), a = t.point.x, l = n.coordinateToLogical(a);
         if (l !== null) {
           const r = { logical: l, price: e };
@@ -4771,7 +4783,7 @@ class hi extends Tt {
             this._activeTool.updatePoints(c, u, p), this.chart.timeScale().applyOptions({});
           }
         }
-      } else if (this._activeToolType === "Path" && this._activeTool instanceof L && this._points.length >= 1) {
+      } else if (this._activeToolType === "Path" && this._activeTool instanceof k && this._points.length >= 1) {
         const n = [...this._points, o];
         this._activeTool.updatePoints(n), this.chart.timeScale().applyOptions({});
       } else if (this._activeToolType === "ElliottImpulseWave" && this._activeTool instanceof et && this._points.length >= 1) {

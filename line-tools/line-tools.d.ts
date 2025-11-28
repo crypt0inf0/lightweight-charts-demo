@@ -4217,6 +4217,7 @@ export declare class LineToolManager extends PluginBase {
 	updateToolOptions(toolType: ToolType, options: any): void;
 	getToolOptions(toolType: ToolType): any;
 	enableSessionHighlighting(highlighter: SessionHighlighter): void;
+	getChartRect(): DOMRect | null;
 	/**
 	 * Select a tool and show its anchor points
 	 */
