@@ -4206,6 +4206,7 @@ export declare class LineToolManager extends PluginBase {
 	private _userPriceAlerts;
 	private _alertNotifications;
 	private _toolbar;
+	private _chartControls;
 	private _setNoneButtonActive;
 	private _cancelActiveDrawing;
 	private _setChartInteraction;
@@ -4216,6 +4217,11 @@ export declare class LineToolManager extends PluginBase {
 	clearTools(): void;
 	updateToolOptions(toolType: ToolType, options: any): void;
 	getToolOptions(toolType: ToolType): any;
+	/**
+	 * Toggle lock state for a tool to prevent or allow dragging
+	 */
+	toggleToolLock(tool: any): void;
+	createAlertForTool(tool: any): void;
 	enableSessionHighlighting(highlighter: SessionHighlighter): void;
 	getChartRect(): DOMRect | null;
 	/**
