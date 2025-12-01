@@ -3,7 +3,7 @@ import { LineToolManager } from './line-tools/line-tools.js';
 import './line-tools/line-tools.css';
 
 // Generate sample candlestick data
-function generateCandleData(days = 200) {
+function generateCandleData(days = 500) {
     const data = [];
     const basePrice = 100;
     let currentPrice = basePrice;
@@ -51,6 +51,7 @@ const chart = createChart(chartContainer, {
         borderColor: '#2B2B43',
         timeVisible: true,
         secondsVisible: false,
+        rightOffset: 10,
     },
     rightPriceScale: {
         borderColor: '#2B2B43',
@@ -70,12 +71,41 @@ const candlestickSeries = chart.addSeries(CandlestickSeries, {
 const data = generateCandleData();
 candlestickSeries.setData(data);
 
-// Fit content
-chart.timeScale().fitContent();
-
 // Initialize Line Tools Manager
 const lineToolManager = new LineToolManager();
 candlestickSeries.attachPrimitive(lineToolManager);
+
+// Reset Zoom function
+function resetZoom() {
+    const totalCandles = 230; // Total view width in candles
+    const rightOffset = 10;   // Empty space on the right
+
+    // Ensure right offset is set
+    chart.timeScale().applyOptions({ rightOffset });
+
+    // Calculate the logical range
+    // Last data index is data.length - 1
+    // We want 'rightOffset' empty bars after the last data point
+    const lastIndex = data.length - 1;
+    const to = lastIndex + rightOffset;
+    const from = to - totalCandles;
+
+    chart.timeScale().setVisibleLogicalRange({ from, to });
+
+    // Reset price scale
+    chart.priceScale('right').applyOptions({
+        autoScale: true,
+    });
+
+    // Update chart controls default range
+    lineToolManager.setDefaultRange({ from, to });
+}
+
+// Initial zoom
+// Use setTimeout to ensure chart is fully initialized and sized
+setTimeout(() => {
+    resetZoom();
+}, 0);
 
 // Tool buttons
 const buttons = {
@@ -126,6 +156,14 @@ Object.entries(buttons).forEach(([id, toolType]) => {
 // Clear all button
 document.getElementById('btn-clear').addEventListener('click', () => {
     lineToolManager.clearTools();
+});
+
+// Reset View button
+document.getElementById('btn-reset').addEventListener('click', () => {
+    // Use setTimeout to ensure UI is ready
+    setTimeout(() => {
+        resetZoom();
+    }, 0);
 });
 
 // Handle window resize

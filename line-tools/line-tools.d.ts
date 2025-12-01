@@ -4222,8 +4222,13 @@ export declare class LineToolManager extends PluginBase {
 	 */
 	toggleToolLock(tool: any): void;
 	createAlertForTool(tool: any): void;
+	toolSupportsAlerts(tool: any): boolean;
 	enableSessionHighlighting(highlighter: SessionHighlighter): void;
 	getChartRect(): DOMRect | null;
+	setDefaultRange(range: {
+		from: number;
+		to: number;
+	}): void;
 	/**
 	 * Select a tool and show its anchor points
 	 */
